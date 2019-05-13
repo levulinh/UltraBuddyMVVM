@@ -21,4 +21,7 @@
     <color name="red">#B71C1C</color>
 
     <color name="placeholderbg">#dddddd</color>
+    <color name="lightRed">#E57373</color>
+    <color name="clearLightRed">#80E57373</color>
+    <color name="transparent">#00000000</color>
 </resources>
