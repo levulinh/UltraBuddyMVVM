@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation" app:startDestination="@id/homeFragment">
+
+    <fragment android:id="@+id/homeFragment"
+              tools:layout="@layout/home_fragment"
+              android:name="andrew.studio.com.ultrabuddymvvm.ui.home.HomeFragment"
+              android:label="@string/title_fragment_home">
+        <action android:id="@+id/action_homeFragment_to_aboutFragment" app:destination="@id/aboutFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment android:id="@+id/aboutFragment" android:name="andrew.studio.com.ultrabuddymvvm.ui.about.AboutFragment"
+              android:label="@string/about"
+              tools:layout="@layout/about_fragment"
+    />
+    <fragment android:id="@+id/ultraMapFragment"
+              android:name="andrew.studio.com.ultrabuddymvvm.ui.map.UltraMapFragment"
+              android:label="UltraMapFragment"
+              tools:layout="@layout/ultra_map_fragment"
+    />
+
+</navigation>

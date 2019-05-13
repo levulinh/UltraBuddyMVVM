@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Ultra Buddy MVVM</string>
+
+    <string name="splash_app_name">Ultra Buddy</string>
+    <string name="splash_mandevices">By Mandevices</string>
+    <string name="title_fragment_home">Talk to Ultra Buddy</string>
+    <string name="text_intro_my_name">Le Vu Linh</string>
+    <string name="text_intro_avatar_desc">A photo of a very handsome boy</string>
+
+    <string name="text_intro_class"><b>Class:</b>Advanced Program of Automatic Control
+    </string>
+    <string name="text_intro_school_year"><b>School Year:</b>59
+    </string>
+    <string name="text_intro_hobbies"><b>Hobbies:</b>Listening to music, watching Youtube craps, learning Chinese
+    </string>
+    <string name="text_intro_ambition"><b>Ambition:</b>Being a fairly good engineer
+    </string>
+    <string name="text_contact_me">Contact me</string>
+
+    <string name="about">About</string>
+    <string name="ask_me_something">#Ask_me_something</string>
+    <string name="describe_ams">It seems that this is our first talk, ask me something like \"Where are you?\"</string>
+    <string name="swipe_up_to_see_more">Swipe up or click to ask Ultra Buddy…</string>
+    <string name="swipe_down_to_hide">Swipe down or click again to hide</string>
+    <string name="sending_message">Sending Message…</string>
+    <string name="where_are_you">Where are you?</string>
+    <string name="go_to">Go to station A</string>
+    <string name="go_to_charge_station">Go to charge station</string>
+    <string name="about_author">About the author</string>
+    <string name="where_am_i">Where Are You?</string>
+
+    <string-array name="request_strings">
+        <item>Where are you?</item>
+        <item>Go to station A</item>
+        <item>Go to charge station</item>
+        <item>About the author</item>
+    </string-array>
+
+    <string-array name="response_strings">
+        <item>OK, I got it!</item>
+        <item>OK, I got it!</item>
+        <item>OK, I got it!</item>
+        <item>OK, I will open About screen for you!</item>
+    </string-array>
+</resources>

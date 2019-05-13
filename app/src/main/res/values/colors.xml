@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#1976D2</color>
+
+    <color name="black">#000000</color>
+    <color name="lightBlack">#111111</color>
+    <color name="lighterBlack">#333333</color>
+    <color name="white">#fff</color>
+    <color name="lightWhite">#eee</color>
+    <color name="blue">#1976D2</color>
+
+    <color name="lightBlue">#ffd0e0f8</color>
+    <color name="darkBlue">#184078</color>'
+
+    <color name="lightGray">#f0f0f0</color>
+    <color name="lightGrayTrans">#F2F2F2F2</color>
+    <color name="darkGray">#ccc</color>
+    <color name="gray">#EEEEEE</color>
+    <color name="red">#B71C1C</color>
+
+    <color name="placeholderbg">#dddddd</color>
+</resources>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="viewModel" type="andrew.studio.com.ultrabuddymvvm.ui.home.HomeViewModel"/>
+    </data>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:background="@drawable/bg_rounded_rect_light_gray"
+            android:paddingTop="8dp">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="48dp"
+                      android:orientation="vertical"
+                      android:paddingStart="16dp" android:paddingEnd="16dp"
+                      android:id="@+id/swipe_up_header"
+                      android:onClick="@{() -> viewModel.toggleRequestSheet()}">
+            <View
+                    android:layout_width="60dp"
+                    android:layout_height="5dp" android:id="@+id/swipe_indicator"
+                    android:background="@drawable/rounded_black_swipe_up_bar"
+                    android:layout_gravity="center_horizontal"/>
+            <TextView
+                    android:text="@{viewModel.statusString}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/text_swipe_up"
+                    android:layout_marginTop="8dp"/>
+            <ProgressBar
+                    style="@android:style/Widget.Material.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/process_bar_sending" android:indeterminate="true"
+                    android:indeterminateTint="@color/darkGray" android:visibility="@{viewModel.isProcessVisible}"/>
+        </LinearLayout>
+        <ScrollView android:layout_width="match_parent" android:layout_height="wrap_content">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <LinearLayout
+                        android:onClick="@{() -> viewModel.onRequestClick(0)}"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp"
+                        android:paddingTop="8dp" android:paddingBottom="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?android:attr/selectableItemBackground">
+                    <TextView
+                            android:text="@string/where_are_you"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black" android:textSize="16sp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:onClick="@{() -> viewModel.onRequestClick(1)}"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp"
+                        android:paddingTop="8dp" android:paddingBottom="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?android:attr/selectableItemBackground">
+                    <TextView
+                            android:text="@string/go_to"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black" android:textSize="16sp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:onClick="@{() -> viewModel.onRequestClick(2)}"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp"
+                        android:paddingTop="8dp" android:paddingBottom="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?android:attr/selectableItemBackground">
+                    <TextView
+                            android:text="@string/go_to_charge_station"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black" android:textSize="16sp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:onClick="@{() -> viewModel.onRequestClick(3)}"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp"
+                        android:paddingTop="8dp" android:paddingBottom="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?android:attr/selectableItemBackground">
+                    <TextView
+                            android:text="@string/about_author"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black" android:textSize="16sp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+</layout>
