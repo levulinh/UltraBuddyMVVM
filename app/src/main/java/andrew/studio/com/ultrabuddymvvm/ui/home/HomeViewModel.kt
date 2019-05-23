@@ -86,6 +86,7 @@ class HomeViewModel(
     }
 
     init {
+        // Override wrong author commit
         initPlayGround()
 //        fetchData()
         fetchUser()
