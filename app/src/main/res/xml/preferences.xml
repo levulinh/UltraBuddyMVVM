@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_title_network">
+        <EditTextPreference android:title="@string/pref_title_ssid"
+                            android:key="@string/WIFI_SSID"
+                            android:summary="@string/pref_summary_ssid"
+                            android:singleLine="true"/>
+        <EditTextPreference android:title="@string/pref_title_password"
+                            android:key="@string/WIFI_PASSWORD"
+                            android:summary="@string/pref_summary_password"
+                            android:singleLine="true" android:password="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_title_ground">
+        <EditTextPreference android:title="@string/pref_title_ground_width"
+                            android:key="@string/GROUND_WIDTH"
+                            android:summary="@string/pref_summary_ground_width"
+                            android:defaultValue="1000"
+                            android:singleLine="true"/>
+        <EditTextPreference android:title="@string/pref_title_ground_height"
+                            android:key="@string/GROUND_HEIGHT"
+                            android:defaultValue="1000"
+                            android:summary="@string/pref_summary_ground_height"
+                            android:singleLine="true"/>
+        <ListPreference android:title="@string/pref_title_grid_size"
+                        android:key="@string/GRID_SIZE"
+                        android:summary="%s"
+                        android:defaultValue="30"
+                        android:entries="@array/grid_size"
+                        android:entryValues="@array/grid_size"/>
+        <EditTextPreference android:title="@string/pref_title_obstacles"
+                            android:key="@string/OBSTACLES"
+                            android:summary="@string/pref_summary_obstacles"/>
+        <Preference android:title="@string/pref_title_station_settings"
+                    android:key="@string/STATIONS"
+                    android:summary="@string/pref_summary_stations"
+        />
+    </PreferenceCategory>
+</PreferenceScreen>

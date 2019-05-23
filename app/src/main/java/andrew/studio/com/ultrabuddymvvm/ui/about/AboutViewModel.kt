@@ -29,18 +29,6 @@ class AboutViewModel(application: Application) : AndroidViewModel(application){
     }
 
     init {
-        val topic = "linh/test"
-        val qos = 1
-        val token = client.subscribe(topic, qos)
-        token.actionCallback = object : IMqttActionListener{
-            override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-                Log.i("MQTT:SUBSCRIBE", "FAILED")
-            }
-
-            override fun onSuccess(asyncActionToken: IMqttToken?) {
-                Log.i("MQTT:SUBSCRIBE", "SUCCESS")
-            }
-        }
         client.setCallback(object : MqttCallback{
             override fun messageArrived(topic: String?, message: MqttMessage?) {
                 Log.i("MQTT:SUBSCRIBE", "$topic : ${message.toString()}")

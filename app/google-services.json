@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "285791252956",
+    "firebase_url": "https://ultra-buddy-andr-1557812528150.firebaseio.com",
+    "project_id": "ultra-buddy-andr-1557812528150",
+    "storage_bucket": "ultra-buddy-andr-1557812528150.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285791252956:android:720e3688401eb41d",
+        "android_client_info": {
+          "package_name": "andrew.studio.com.ultrabuddymvvm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285791252956-smbv3d9abigou9hkesj6a366rq08hcn4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "andrew.studio.com.ultrabuddymvvm",
+            "certificate_hash": "10845cbb821b616f4771229ebe877af2b32b86cc"
+          }
+        },
+        {
+          "client_id": "285791252956-mqhg5jf0nmmab7tl2b3qj4hs4b26rvd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCauq2uVswcEElrNUqXoZSDv8QWd-2S8U4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285791252956-mqhg5jf0nmmab7tl2b3qj4hs4b26rvd9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

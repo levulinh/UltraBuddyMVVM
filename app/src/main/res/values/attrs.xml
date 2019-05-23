@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RobotGround">
+        <attr name="groundWidth" format="integer"/>
+        <attr name="groundHeight" format="integer"/>
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="direction" format="enum">
+            <enum name="EAST" value="0"/>
+            <enum name="WEST" value="1"/>
+            <enum name="SOUTH" value="2"/>
+            <enum name="NORTH" value="3"/>
+        </attr>
+    </declare-styleable>
+</resources>

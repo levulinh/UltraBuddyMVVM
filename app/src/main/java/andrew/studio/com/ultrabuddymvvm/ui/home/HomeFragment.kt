@@ -6,12 +6,9 @@ import andrew.studio.com.ultrabuddymvvm.internal.ScopedFragment
 import andrew.studio.com.ultrabuddymvvm.R
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -21,12 +18,10 @@ import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-
 
 class HomeFragment : ScopedFragment(), KodeinAware {
     override val kodein by closestKodein()
@@ -68,7 +63,9 @@ class HomeFragment : ScopedFragment(), KodeinAware {
 
             emptyLayoutVisible.observe(this@HomeFragment, Observer {
                 if (it == true) {
+
                     binding.apply {
+                        fabScrollDown.hide()
                         layoutEmpty.visibility = View.VISIBLE
                         recyclerConversation.visibility = View.GONE
                     }
@@ -95,10 +92,19 @@ class HomeFragment : ScopedFragment(), KodeinAware {
                 }
             })
 
-            navigateToAboutEvent.observe(this@HomeFragment, Observer {
-                if (it == true) {
-                    findNavController().navigate(R.id.action_homeFragment_to_aboutFragment)
-                    viewModel.doneNavigateToAbout()
+            navigateResponse.observe(this@HomeFragment, Observer {
+                val responseArray = resources.getStringArray(R.array.response_strings)
+                when (it) {
+                    0 -> {
+                        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToUltraMapFragment())
+                        Toast.makeText(context, responseArray[0] , Toast.LENGTH_SHORT).show()
+                        viewModel.doneNavigate()
+                    }
+                    3 -> {
+                        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAboutFragment())
+                        Toast.makeText(context, responseArray[3] , Toast.LENGTH_SHORT).show()
+                        viewModel.doneNavigate()
+                    }
                 }
             })
 
@@ -120,18 +126,18 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun updateMessageEntries(
-        it: List<MessageEntry>?,
+        messages: List<MessageEntry>?,
         binding: HomeFragmentBinding,
         adapter: ConversationAdapter
     ) {
-        it ?: return
-        if (it.isEmpty()) {
+        messages ?: return
+        if (messages.isEmpty()) {
             viewModel.onConversationLoaded(true)
             binding.header.isSelected = false
         } else {
             viewModel.onConversationLoaded(false)
-            adapter.submitList(it)
-            binding.recyclerConversation.smoothScrollToPosition(it.size - 1)
+            adapter.submitList(messages)
+            binding.recyclerConversation.smoothScrollToPosition(messages.size - 1)
         }
     }
 

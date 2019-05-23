@@ -28,6 +28,33 @@
     <string name="go_to_charge_station">Go to charge station</string>
     <string name="about_author">About the author</string>
     <string name="where_am_i">Where Are You?</string>
+    <string name="ultra_buddy">Ultra Buddy</string>
+
+    <string name="pref_title_network">Network settings</string>
+    <string name="pref_title_ground">Ground settings</string>
+    <string name="pref_title_ssid">Wi-Fi SSID</string>
+    <string name="pref_title_password">Wi-Fi Password</string>
+    <string name="pref_summary_ssid">SSID of your Wi-Fi</string>
+    <string name="pref_summary_password">Password of your Wi-Fi</string>
+    <string name="pref_title_ground_height">Ground Height (in cm)</string>
+    <string name="pref_title_ground_width">Ground Width (in cm)</string>
+    <string name="pref_summary_ground_width">Width of the ground (in cm)</string>
+    <string name="pref_summary_ground_height">Height of the ground (in cm)</string>
+    <string name="pref_title_grid_size">Grid size (in cm)</string>
+    <string name="settings">Settings</string>
+
+    <string name="WIFI_SSID">WIFI_SSID</string>
+    <string name="WIFI_PASSWORD">WIFI_PASSWORD</string>
+    <string name="GROUND_WIDTH">GROUND_WIDTH</string>
+    <string name="GROUND_HEIGHT">GROUND_HEIGHT</string>
+    <string name="GRID_SIZE">GRID_SIZE</string>
+    <string name="OBSTACLES">OBSTACLES</string>
+    <string name="pref_title_station_settings">Station Settings</string>
+    <string name="STATIONS">STATIONS</string>
+    <string name="pref_summary_stations">Open Stations settings screen</string>
+    <string name="pref_summary_obstacles">Edit obstacles here</string>
+    <string name="pref_title_obstacles">Obstacles settings</string>
+    <string name="loading_map">Loading Map</string>
 
     <string-array name="request_strings">
         <item>Where are you?</item>
@@ -37,9 +64,16 @@
     </string-array>
 
     <string-array name="response_strings">
-        <item>OK, I got it!</item>
+        <item>OK, you can track my location on this screen!</item>
         <item>OK, I got it!</item>
         <item>OK, I got it!</item>
         <item>OK, I will open About screen for you!</item>
+    </string-array>
+
+    <string-array name="grid_size">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
     </string-array>
 </resources>

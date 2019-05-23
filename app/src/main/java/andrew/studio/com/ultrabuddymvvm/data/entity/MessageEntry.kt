@@ -16,5 +16,6 @@ data class MessageEntry(
     @SerializedName("sent_time")
     val sentTime: Long,
     @Embedded(prefix = "to_")
-    val to: UserEntry
+    val to: UserEntry,
+    val code: Int
 )

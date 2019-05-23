@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import okhttp3.Interceptor
 import okhttp3.Response
+import java.net.SocketException
 
 class ConnectivityInterceptorImpl(
     context: Context
@@ -15,7 +16,11 @@ class ConnectivityInterceptorImpl(
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!isOnline())
             throw NoConnectivityException()
-        return chain.proceed(chain.request())
+        try {
+            return chain.proceed(chain.request())
+        } catch (e: Exception){
+            throw e
+        }
     }
 
     private fun isOnline(): Boolean {

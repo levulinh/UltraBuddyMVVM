@@ -23,7 +23,7 @@
                 android:layout_height="match_parent"
                 android:paddingBottom="64dp"
                 android:clipToPadding="false"
-                tools:listitem="@layout/item_chat_bubble" android:id="@+id/recycler_conversation"
+                tools:listitem="@layout/item_admin_chat_bubble" android:id="@+id/recycler_conversation"
         />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

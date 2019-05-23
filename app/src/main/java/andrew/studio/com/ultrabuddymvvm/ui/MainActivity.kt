@@ -2,6 +2,7 @@ package andrew.studio.com.ultrabuddymvvm.ui
 
 import andrew.studio.com.ultrabuddymvvm.R
 import andrew.studio.com.ultrabuddymvvm.UltraBuddyApplication
+import andrew.studio.com.ultrabuddymvvm.internal.Helper
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -38,28 +39,14 @@ class MainActivity : AppCompatActivity() {
         val token = client.connect(options)
         token.actionCallback = object : IMqttActionListener{
             override fun onSuccess(asyncActionToken: IMqttToken?) {
-                Toast.makeText(this@MainActivity, "MQTT Connected", Toast.LENGTH_SHORT).show()
-                mqttSubscribe(client, "ub/response")
+                Helper.mqttSubscribe(client, "ub/response")
+                Helper.mqttSubscribe(client, "ub/position")
             }
 
             override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
                 Toast.makeText(this@MainActivity, "MQTT Connect fail", Toast.LENGTH_SHORT).show()
             }
 
-        }
-    }
-
-    private fun mqttSubscribe(client: MqttAndroidClient, topic: String) {
-        val qos = 1
-        val token = client.subscribe(topic, qos)
-        token.actionCallback = object : IMqttActionListener {
-            override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-                Log.i("MQTT:SUBSCRIBE", "FAILED")
-            }
-
-            override fun onSuccess(asyncActionToken: IMqttToken?) {
-                Log.i("MQTT:SUBSCRIBE", "SUCCESS")
-            }
         }
     }
 

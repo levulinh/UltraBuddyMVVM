@@ -1,8 +1,9 @@
 package andrew.studio.com.ultrabuddymvvm.ui.home
 
 import andrew.studio.com.ultrabuddymvvm.data.entity.MessageEntry
-import andrew.studio.com.ultrabuddymvvm.databinding.ItemChatBubbleBinding
+import andrew.studio.com.ultrabuddymvvm.databinding.ItemAdminChatBubbleBinding
 import andrew.studio.com.ultrabuddymvvm.databinding.ItemMyChatBubbleBinding
+import andrew.studio.com.ultrabuddymvvm.utils.Helper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,13 +46,15 @@ class ConversationAdapter : ListAdapter<MessageEntry, RecyclerView.ViewHolder>(M
         else ITEM_MY_MESSAGE
     }
 
-    class AdminViewHolder private constructor(private val binding: ItemChatBubbleBinding) :
+    class AdminViewHolder private constructor(private val binding: ItemAdminChatBubbleBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MessageEntry, previousItem: MessageEntry?) {
 
             binding.imageAvatar.visibility =
                 if (previousItem == null || previousItem.from.userName != "admin") View.VISIBLE
                 else View.INVISIBLE
+
+            binding.textTime.text = item.sentTime.toTimeString()
 
             if (previousItem != null)
                 if (item.from.id != previousItem.from.id) binding.extraSpace.visibility = View.VISIBLE
@@ -63,7 +66,7 @@ class ConversationAdapter : ListAdapter<MessageEntry, RecyclerView.ViewHolder>(M
         companion object {
             fun from(parent: ViewGroup): AdminViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemChatBubbleBinding.inflate(layoutInflater, parent, false)
+                val binding = ItemAdminChatBubbleBinding.inflate(layoutInflater, parent, false)
                 return AdminViewHolder(binding)
             }
         }
@@ -73,6 +76,7 @@ class ConversationAdapter : ListAdapter<MessageEntry, RecyclerView.ViewHolder>(M
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MessageEntry, previousItem: MessageEntry?) {
             binding.message = item
+            binding.textTime.text = item.sentTime.toTimeString()
             if (previousItem != null)
                 if (item.from.id != previousItem.from.id) binding.extraSpace.visibility = View.VISIBLE
                 else binding.extraSpace.visibility = View.GONE
@@ -89,13 +93,17 @@ class ConversationAdapter : ListAdapter<MessageEntry, RecyclerView.ViewHolder>(M
     }
 }
 
+private fun Long.toTimeString(): String {
+    return Helper.toTimeString(this)
+}
+
 class MessageDiffCallback : DiffUtil.ItemCallback<MessageEntry>() {
     override fun areItemsTheSame(oldItem: MessageEntry, newItem: MessageEntry): Boolean {
         return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: MessageEntry, newItem: MessageEntry): Boolean {
-        return oldItem == newItem
+        return oldItem.content == newItem.content
     }
 
 }

@@ -9,6 +9,10 @@
               android:label="@string/title_fragment_home">
         <action android:id="@+id/action_homeFragment_to_aboutFragment" app:destination="@id/aboutFragment"
                 app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_right"/>
+        <action android:id="@+id/action_homeFragment_to_ultraMapFragment" app:destination="@id/ultraMapFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_right"/>
+        <action android:id="@+id/action_homeFragment_to_settingsFragment" app:destination="@id/settingsFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment android:id="@+id/aboutFragment" android:name="andrew.studio.com.ultrabuddymvvm.ui.about.AboutFragment"
               android:label="@string/about"
@@ -19,5 +23,8 @@
               android:label="UltraMapFragment"
               tools:layout="@layout/ultra_map_fragment"
     />
+    <fragment android:id="@+id/settingsFragment"
+              android:name="andrew.studio.com.ultrabuddymvvm.ui.settings.SettingsFragment"
+              android:label="settings_fragment" tools:layout="@layout/settings_fragment"/>
 
 </navigation>

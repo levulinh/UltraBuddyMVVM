@@ -1,5 +1,6 @@
-package andrew.studio.com.ultrabuddymvvm.data.network
+package andrew.studio.com.ultrabuddymvvm.data.network.datasource
 
+import andrew.studio.com.ultrabuddymvvm.data.network.UltraBuddyApiService
 import andrew.studio.com.ultrabuddymvvm.data.network.response.AllMessageResponse
 import andrew.studio.com.ultrabuddymvvm.data.network.response.MessageResponse
 import andrew.studio.com.ultrabuddymvvm.internal.NoConnectivityException
@@ -18,10 +19,10 @@ class MessageDataSourceImpl(
     override val newAddedMessage: LiveData<MessageResponse>
         get() = _newAddedMessage
 
-    override suspend fun addNewMessage(from: String, to: String, content: String) {
+    override suspend fun addNewMessage(from: String, to: String, content: String, code: Int) {
         try {
             val addedNewMessage = ultraBuddyApiService
-                .addNewMessageAsync(from, to, content)
+                .addNewMessageAsync(from, to, content, code)
                 .await()
             _newAddedMessage.postValue(addedNewMessage)
         } catch (e: NoConnectivityException) {
@@ -29,8 +30,18 @@ class MessageDataSourceImpl(
         }
     }
 
+    override suspend fun addNewMessageNoRefresh(from: String, to: String, content: String, code: Int) {
+        try {
+            ultraBuddyApiService
+                .addNewMessageAsync(from, to, content, code)
+                .await()
+        } catch (e: NoConnectivityException) {
+            Log.e("Connectivity", "No internet connection", e)
+        }
+    }
+
     override suspend fun fetchAllMessages(from: String, to: String) {
-        try{
+        try {
             val fetchedAllMessages = ultraBuddyApiService
                 .getAllMessageAsync(from, to)
                 .await()
