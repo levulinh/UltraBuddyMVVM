@@ -12,6 +12,9 @@ object Helper {
     const val GROUND_WIDTH = "GROUND_WIDTH"
     const val GROUND_HEIGHT = "GROUND_HEIGHT"
     const val GRID_SIZE = "GRID_SIZE"
+    const val WIFI_SSID = "WIFI_SSID"
+    const val WIFI_PASSWORD = "WIFI_PASSWORD"
+    const val OBSTACLES = "OBSTACLES"
 
     fun mqttPublish(client: MqttAndroidClient, topic: String, payload: String) {
 

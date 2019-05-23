@@ -57,9 +57,9 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         }
 
         viewModel.apply {
-            storedMessage.observe(this@HomeFragment, Observer {
-                updateMessageEntries(it, binding, adapter)
-            })
+//            storedMessage.observe(this@HomeFragment, Observer {
+//                updateMessageEntries(it, binding, adapter)
+//            })
 
             emptyLayoutVisible.observe(this@HomeFragment, Observer {
                 if (it == true) {
@@ -116,8 +116,13 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         }
 
         launch {
+            binding.shimmerLoading.startShimmer()
             val allMessage = viewModel.message.await()
             allMessage.observe(this@HomeFragment, Observer {
+                binding.shimmerLoading.apply {
+                    stopShimmer()
+                    visibility = View.GONE
+                }
                 updateMessageEntries(it, binding, adapter)
             })
         }

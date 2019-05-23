@@ -15,6 +15,13 @@
                 android:layout_height="1dp" android:id="@+id/header"
                 android:stateListAnimator="@animator/header_animator" android:background="@color/white"
         />
+        <com.facebook.shimmer.ShimmerFrameLayout android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 android:id="@+id/shimmer_loading"
+                                                 app:shimmer_duration="1000"
+        >
+            <include layout="@layout/chat_items_place_holder"/>
+        </com.facebook.shimmer.ShimmerFrameLayout>
         <include layout="@layout/empty_conversation"
                  android:id="@+id/layout_empty"
                  android:visibility="invisible"/>

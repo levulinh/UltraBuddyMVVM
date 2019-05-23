@@ -87,7 +87,7 @@ class HomeViewModel(
 
     init {
         initPlayGround()
-        fetchData()
+//        fetchData()
         fetchUser()
     }
 
@@ -142,7 +142,7 @@ class HomeViewModel(
                 path = path.asReversed()
                 var commandString = ""
                 for (i in 0 until path.size-1) {
-                    commandString += toAction(path[i], path[i+1]) + "|"
+                    commandString += toAction(path[i], path[i+1])
                 }
                 commandString += "E"
                 Timber.d(commandString)
@@ -165,13 +165,13 @@ class HomeViewModel(
         }
     }
 
-    private fun fetchData() {
-        uiScope.launch {
-            _storedMessage.value = withContext(Dispatchers.IO) {
-                messageRepository.getAllStoredMessage(ADMIN_ID, MY_ID)
-            }
-        }
-    }
+//    private fun fetchData() {
+//        uiScope.launch {
+//            _storedMessage.value = withContext(Dispatchers.IO) {
+//                messageRepository.getAllStoredMessage(ADMIN_ID, MY_ID)
+//            }
+//        }
+//    }
 
     val message by lazyDeferred {
         messageRepository.getAllMessage(ADMIN_ID, MY_ID)

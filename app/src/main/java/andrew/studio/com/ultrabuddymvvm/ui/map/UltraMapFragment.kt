@@ -1,20 +1,17 @@
 package andrew.studio.com.ultrabuddymvvm.ui.map
 
-import androidx.lifecycle.ViewModelProviders
+import andrew.studio.com.ultrabuddymvvm.R
+import andrew.studio.com.ultrabuddymvvm.data.entity.Polygon
+import andrew.studio.com.ultrabuddymvvm.databinding.UltraMapFragmentBinding
+import andrew.studio.com.ultrabuddymvvm.internal.ScopedFragment
+import andrew.studio.com.ultrabuddymvvm.utils.Helper
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import andrew.studio.com.ultrabuddymvvm.R
-import andrew.studio.com.ultrabuddymvvm.data.entity.Point
-import andrew.studio.com.ultrabuddymvvm.data.entity.Polygon
-import andrew.studio.com.ultrabuddymvvm.databinding.UltraMapFragmentBinding
-import andrew.studio.com.ultrabuddymvvm.internal.ScopedFragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import androidx.lifecycle.ViewModelProviders
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -38,14 +35,7 @@ class UltraMapFragment : ScopedFragment(), KodeinAware {
                     binding.ground.visibility = View.VISIBLE
                     binding.layoutLoading.visibility = View.GONE
 
-                    val obstaclesObject: List<Polygon>
-                    obstaclesObject = if (it.obstacles.isEmpty())
-                        emptyList()
-                    else {
-                        val listType = object : TypeToken<List<Polygon>>() {
-                        }.type
-                        Gson().fromJson(it.obstacles, listType)
-                    }
+                    val obstaclesObject: List<Polygon> = Helper.gsonToList(it.obstacles)
                     binding.ground.apply {
                         groundHeight = it.height
                         groundWidth = it.width

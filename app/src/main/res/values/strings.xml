@@ -55,6 +55,9 @@
     <string name="pref_summary_obstacles">Edit obstacles here</string>
     <string name="pref_title_obstacles">Obstacles settings</string>
     <string name="loading_map">Loading Map</string>
+    <string name="add">Add</string>
+    <string name="new_obstacle">New Obstacle</string>
+    <string name="illegal_syntax">Illegal Syntax, please try again</string>
 
     <string-array name="request_strings">
         <item>Where are you?</item>

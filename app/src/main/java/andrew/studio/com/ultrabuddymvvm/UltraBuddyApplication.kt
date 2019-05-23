@@ -8,6 +8,7 @@ import andrew.studio.com.ultrabuddymvvm.data.network.datasource.*
 import andrew.studio.com.ultrabuddymvvm.data.repository.*
 import andrew.studio.com.ultrabuddymvvm.ui.home.HomeViewModelFactory
 import andrew.studio.com.ultrabuddymvvm.ui.map.UltraMapViewModelFactory
+import andrew.studio.com.ultrabuddymvvm.ui.settings.obstaclesettings.ObstacleSettingsViewModelFactory
 import android.app.Application
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.MqttClient
@@ -53,6 +54,7 @@ class UltraBuddyApplication : Application(), KodeinAware {
         bind<Core>() with singleton { CoreImpl(instance()) }
         bind() from provider { HomeViewModelFactory(instance(), instance(), instance(), instance()) }
         bind() from provider { UltraMapViewModelFactory(instance(), instance()) }
+        bind() from provider { ObstacleSettingsViewModelFactory(instance(), instance()) }
     }
 
     lateinit var client: MqttAndroidClient

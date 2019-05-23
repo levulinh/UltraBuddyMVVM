@@ -6,6 +6,7 @@ import andrew.studio.com.ultrabuddymvvm.internal.NoConnectivityException
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import timber.log.Timber
 
 class GroundDataSourceImpl(
     private val ultraBuddyApiService: UltraBuddyApiService
@@ -21,7 +22,7 @@ class GroundDataSourceImpl(
                 .await()
             _downloadedGround.postValue(fetchedGround)
         } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No internet connection", e)
+            Timber.tag("Connectivity").e(e, "No internet connection")
         }
     }
 
@@ -32,7 +33,7 @@ class GroundDataSourceImpl(
                 .await()
             _downloadedGround.postValue(fetchedGround)
         } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No internet connection", e)
+            Timber.tag("Connectivity").e(e, "No internet connection")
         }
     }
 }

@@ -25,6 +25,12 @@
     />
     <fragment android:id="@+id/settingsFragment"
               android:name="andrew.studio.com.ultrabuddymvvm.ui.settings.SettingsFragment"
-              android:label="settings_fragment" tools:layout="@layout/settings_fragment"/>
+              android:label="settings_fragment" tools:layout="@layout/settings_fragment">
+        <action android:id="@+id/action_settingsFragment_to_obstacleSettingsFragment"
+                app:destination="@id/obstacleSettingsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/obstacleSettingsFragment"
+              android:name="andrew.studio.com.ultrabuddymvvm.ui.settings.obstaclesettings.ObstacleSettingsFragment"
+              android:label="ObstacleSettingsFragment"/>
 
 </navigation>

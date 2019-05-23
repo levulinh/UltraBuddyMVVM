@@ -3,6 +3,7 @@ package andrew.studio.com.ultrabuddymvvm.data.repository
 import andrew.studio.com.ultrabuddymvvm.data.db.GroundDao
 import andrew.studio.com.ultrabuddymvvm.data.entity.GroundEntry
 import andrew.studio.com.ultrabuddymvvm.data.network.datasource.GroundDataSource
+import andrew.studio.com.ultrabuddymvvm.internal.Helper
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -13,6 +14,12 @@ class GroundRepositoryImpl(private val groundDao: GroundDao,
                            private val groundDataSource: GroundDataSource
 
 ) : GroundRepository {
+    override suspend fun fetchGround(userId: String) {
+        GlobalScope.launch {
+            groundDataSource.fetchCurrentGround(userId)
+        }
+    }
+
     init {
         groundDataSource.downloadedGround.observeForever {
             persistGround(it.ground)
