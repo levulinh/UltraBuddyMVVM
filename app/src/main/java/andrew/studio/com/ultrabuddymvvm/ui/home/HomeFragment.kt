@@ -39,6 +39,8 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         binding.lifecycleOwner = this
         setHasOptionsMenu(true)
 
+        binding.fabScrollDown.hide()
+
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.swipeRequest)
 
         val adapter = ConversationAdapter()

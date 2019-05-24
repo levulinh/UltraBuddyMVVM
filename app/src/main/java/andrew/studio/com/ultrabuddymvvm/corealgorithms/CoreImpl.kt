@@ -18,9 +18,7 @@ import android.preference.PreferenceManager
 import java.util.*
 
 
-
-
-class CoreImpl(context: Context): Core {
+class CoreImpl(context: Context) : Core {
 
     private val appContext = context.applicationContext
     private val preferences: SharedPreferences
@@ -43,6 +41,7 @@ class CoreImpl(context: Context): Core {
 
     override val ground = Array(200) { BooleanArray(200) }
     private var numCol = 1
+    private var numRow = 1
     override var path = mutableListOf<Node>()
     private val pathEncoded = mutableListOf<Int>()
     private var currentDir = NORTH
@@ -59,10 +58,9 @@ class CoreImpl(context: Context): Core {
     override var ve: Int = 0
 
 
-
-
     init {
         numCol = w / dens
+        numRow = h / dens
         for (i in 0 until 200)
             for (j in 0 until 200)
                 isFree[i][j] = true
@@ -95,29 +93,40 @@ class CoreImpl(context: Context): Core {
             for (j in 0 until 200)
                 ground[i][j] = false
 
-        for (i in 1..numRow)
-            for (j in 1..numCol)
+        for (i in 0..numRow)
+            for (j in 0..numCol)
                 ground[i][j] = true
 
-        for (i in 1..numRow)
-            for (j in 1..numCol) {
-                val point = toRealPosition(i, j, dens)
-                if (point.x < SAFE_DIST || point.x > w - SAFE_DIST || point.y < SAFE_DIST || point.y > h - SAFE_DIST) {
+        for (i in 0..numRow)
+            for (j in 0..numCol) {
+                val realX = dens * (j + 0.5)
+                val realY = dens * (i + 0.5)
+                if (realX < SAFE_DIST || realX > w - SAFE_DIST || realY < SAFE_DIST || realY > h - SAFE_DIST) {
                     ground[i][j] = false
                 }
             }
 
         for (poly in p.obstacles) {
-            for (i in 1..numRow)
-                for (j in 1..numCol) {
+            for (i in 0..numRow)
+                for (j in 0..numCol) {
                     if (ground[i][j] && toRealPosition(i, j, dens) in poly)
                         ground[i][j] = false
                 }
         }
     }
 
+    private fun isAccessible(u: Int, v: Int): Boolean{
+        if (u<0 || u>numCol || v <0 || v>numRow) return false
+        return ground[u][v]
+    }
+
     override fun doBfs(vs: Int, us: Int, ve: Int, ue: Int) {
         val q: Queue<Node> = ArrayDeque<Node>()
+
+        if (!ground[us][vs]) {
+            return
+        }
+
         tracking[encode(us, vs, numCol)] = -1
         isFree[us][vs] = false
         q.add(Node(us, vs, 0))
@@ -127,11 +136,11 @@ class CoreImpl(context: Context): Core {
             for (i in 0 until 4) {
                 val ua = front.x + dir[i][0]
                 val va = front.y + dir[i][1]
-                if (isFree[ua][va] && ground[ua][va]){
+                if (isFree[ua][va] && isAccessible(ua, va)) {
                     isFree[ua][va] = false
-                    q.add(Node(ua, va, front.count+1))
+                    q.add(Node(ua, va, front.count + 1))
                     tracking[encode(ua, va, numCol)] = encode(front.x, front.y, numCol)
-                    if (ua==ue && va==ve){
+                    if (ua == ue && va == ve) {
                         trackFound = true
                         return
                     }
@@ -151,7 +160,7 @@ class CoreImpl(context: Context): Core {
         } else return
     }
 
-    override fun toAction(sourceNode: Node, targetNode: Node): String{
+    override fun toAction(sourceNode: Node, targetNode: Node): String {
         var turnDir: Int = NORTH
         if (targetNode.x > sourceNode.x) turnDir = EAST
         if (targetNode.x < sourceNode.x) turnDir = WEST

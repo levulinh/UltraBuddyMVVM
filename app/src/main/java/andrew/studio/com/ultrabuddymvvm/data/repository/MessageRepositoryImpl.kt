@@ -4,10 +4,9 @@ import andrew.studio.com.ultrabuddymvvm.data.db.MessageDao
 import andrew.studio.com.ultrabuddymvvm.data.db.UserDao
 import andrew.studio.com.ultrabuddymvvm.data.entity.MessageEntry
 import andrew.studio.com.ultrabuddymvvm.data.entity.UserEntry
-import andrew.studio.com.ultrabuddymvvm.data.network.datasource.MessageDataSource
+import andrew.studio.com.ultrabuddymvvm.data.datasource.MessageDataSource
 import andrew.studio.com.ultrabuddymvvm.data.network.response.AllMessageResponse
 import andrew.studio.com.ultrabuddymvvm.data.network.response.MessageResponse
-import android.util.Log
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

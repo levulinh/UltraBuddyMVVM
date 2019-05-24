@@ -1,9 +1,8 @@
-package andrew.studio.com.ultrabuddymvvm.data.network.datasource
+package andrew.studio.com.ultrabuddymvvm.data.datasource
 
 import andrew.studio.com.ultrabuddymvvm.data.network.UltraBuddyApiService
 import andrew.studio.com.ultrabuddymvvm.data.network.response.GroundResponse
 import andrew.studio.com.ultrabuddymvvm.internal.NoConnectivityException
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import timber.log.Timber

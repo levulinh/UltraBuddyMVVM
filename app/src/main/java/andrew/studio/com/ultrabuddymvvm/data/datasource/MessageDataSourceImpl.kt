@@ -1,4 +1,4 @@
-package andrew.studio.com.ultrabuddymvvm.data.network.datasource
+package andrew.studio.com.ultrabuddymvvm.data.datasource
 
 import andrew.studio.com.ultrabuddymvvm.data.network.UltraBuddyApiService
 import andrew.studio.com.ultrabuddymvvm.data.network.response.AllMessageResponse

@@ -135,7 +135,7 @@ class HomeViewModel(
             us = 1
             vs = 2
             ue = 4
-            ve = 13
+            ve = 12
 
             doBfs(us, vs, ue, ve)
             if (trackFound){

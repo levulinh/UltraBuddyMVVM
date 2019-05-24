@@ -4,7 +4,7 @@ import andrew.studio.com.ultrabuddymvvm.corealgorithms.Core
 import andrew.studio.com.ultrabuddymvvm.corealgorithms.CoreImpl
 import andrew.studio.com.ultrabuddymvvm.data.db.MessageDatabase
 import andrew.studio.com.ultrabuddymvvm.data.network.*
-import andrew.studio.com.ultrabuddymvvm.data.network.datasource.*
+import andrew.studio.com.ultrabuddymvvm.data.datasource.*
 import andrew.studio.com.ultrabuddymvvm.data.repository.*
 import andrew.studio.com.ultrabuddymvvm.ui.home.HomeViewModelFactory
 import andrew.studio.com.ultrabuddymvvm.ui.map.UltraMapViewModelFactory
