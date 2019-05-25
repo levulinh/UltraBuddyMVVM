@@ -17,7 +17,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginBottom="8dp"
                 tools:listitem="@layout/item_obstacle_edit"
-                app:layout_constraintBottom_toTopOf="@+id/text_input_layout"/>
+                app:layout_constraintBottom_toTopOf="@+id/text_input_layout" android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
         <com.google.android.material.textfield.TextInputLayout
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/button_add"

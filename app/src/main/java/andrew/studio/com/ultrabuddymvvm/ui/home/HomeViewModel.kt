@@ -233,7 +233,7 @@ class HomeViewModel(
 //            delay(500)
             result
         }
-
+        Helper.mqttPublish(client, "depart", "0001000023")
         _navigateResponse.postValue(position)
     }
 

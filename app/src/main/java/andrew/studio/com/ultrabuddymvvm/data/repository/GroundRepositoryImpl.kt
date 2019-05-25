@@ -13,6 +13,12 @@ class GroundRepositoryImpl(private val groundDao: GroundDao,
                            private val groundDataSource: GroundDataSource
 
 ) : GroundRepository {
+    override suspend fun updateObstacles(userId: String, obstacles: String) {
+        withContext(Dispatchers.IO) {
+            groundDao.updateObstacles(obstacles)
+        }
+    }
+
     override suspend fun fetchGround(userId: String) {
         GlobalScope.launch {
             groundDataSource.fetchCurrentGround(userId)

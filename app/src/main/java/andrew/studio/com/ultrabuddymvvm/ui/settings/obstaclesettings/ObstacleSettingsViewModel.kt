@@ -22,13 +22,15 @@ class ObstacleSettingsViewModel(
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
-    private var _currentGroundParams = MutableLiveData<GroundEntry>()
-    val currentGroundParams: LiveData<GroundEntry>
+    private var _currentGroundParams = MutableLiveData<List<Polygon>>()
+    val currentGroundParams: LiveData<List<Polygon>>
         get() = _currentGroundParams
 
-    private var _newObstacle = MutableLiveData<Polygon>()
-    val newObstacle: LiveData<Polygon>
-        get() = _newObstacle
+    private var _eventClearEditText = MutableLiveData<Boolean>()
+    val eventClearEditText: LiveData<Boolean>
+        get() = _eventClearEditText
+
+    lateinit var localObstacleList: List<Polygon>
 
     init {
         fetchCurrentGround()
@@ -36,19 +38,36 @@ class ObstacleSettingsViewModel(
 
     private fun fetchCurrentGround() {
         uiScope.launch {
-            _currentGroundParams.value =
-                withContext(Dispatchers.IO) { return@withContext groundRepository.getCurrentGroundNonLive() }
+            localObstacleList =
+                withContext(Dispatchers.IO) {
+                    Helper.gsonToList<Polygon>(groundRepository.getCurrentGroundNonLive().obstacles)
+                }
+            _currentGroundParams.value = localObstacleList
         }
     }
 
     fun onAddButtonClick(str: String) {
         val polygon: Polygon
+        _eventClearEditText.value = true
         try {
             polygon = Helper.stringToPolygon(str)
-            _newObstacle.value = polygon
+            val list = localObstacleList
+
+            val newList: List<Polygon>
+
+            list.toMutableList().also {
+                it.add(polygon)
+                newList = it.toList()
+                localObstacleList = newList
+            }
+            _currentGroundParams.value = newList
         } catch (e: NumberFormatException) {
             Toast.makeText(context, context.getString(R.string.illegal_syntax), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun saveObstacles() {
+
     }
 
     override fun onCleared() {

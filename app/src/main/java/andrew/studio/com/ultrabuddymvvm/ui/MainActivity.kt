@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         token.actionCallback = object : IMqttActionListener{
             override fun onSuccess(asyncActionToken: IMqttToken?) {
                 Helper.mqttSubscribe(client, "ub/response")
-                Helper.mqttSubscribe(client, "ub/position")
+                Helper.mqttSubscribe(client, "position")
             }
 
             override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {

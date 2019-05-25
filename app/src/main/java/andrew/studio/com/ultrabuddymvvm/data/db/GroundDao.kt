@@ -3,10 +3,7 @@ package andrew.studio.com.ultrabuddymvvm.data.db
 import andrew.studio.com.ultrabuddymvvm.data.entity.CURRENT_GROUND_ID
 import andrew.studio.com.ultrabuddymvvm.data.entity.GroundEntry
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface GroundDao {
@@ -18,4 +15,7 @@ interface GroundDao {
 
     @Query("select * from `ground-table` where userId = '5cc8244ea17725001735abd8'")
     fun getGroundLive(): LiveData<GroundEntry>
+
+    @Query("update `ground-table` set obstacles = :newObstacles")
+    fun updateObstacles(newObstacles: String)
 }

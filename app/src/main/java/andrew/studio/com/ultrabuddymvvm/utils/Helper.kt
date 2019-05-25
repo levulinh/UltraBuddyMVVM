@@ -10,6 +10,8 @@ import java.util.*
 
 class Helper {
     companion object {
+        const val MY_ID = "5cc8244ea17725001735abd8"
+
         fun toTimeString(timeMillis: Long): String {
             val sdf = SimpleDateFormat("hh:mm", Locale.US)
             return sdf.format(timeMillis)
@@ -43,7 +45,7 @@ class Helper {
             val points = polygon.points
             var str = ""
             for (i in 0 until points.size - 1) {
-                str += "${points[i].x},${points[i].y}|"
+                str += "${points[i].x},${points[i].y}#"
             }
             str += "${points[points.size-1].x},${points[points.size-1].y}"
             return str
@@ -51,7 +53,7 @@ class Helper {
 
         fun stringToPolygon(str: String): Polygon{
             try {
-                val pointStringList = str.split("|")
+                val pointStringList = str.split("#")
                 val points = mutableListOf<Point>()
                 for (pointString in pointStringList){
                     val paramList = pointString.split(",")

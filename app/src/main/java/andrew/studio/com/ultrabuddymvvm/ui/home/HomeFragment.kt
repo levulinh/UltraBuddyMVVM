@@ -99,12 +99,17 @@ class HomeFragment : ScopedFragment(), KodeinAware {
                 when (it) {
                     0 -> {
                         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToUltraMapFragment())
-                        Toast.makeText(context, responseArray[0] , Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, responseArray[it] , Toast.LENGTH_SHORT).show()
+                        viewModel.doneNavigate()
+                    }
+                    1 -> {
+                        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToUltraMapFragment())
+                        Toast.makeText(context, responseArray[it] , Toast.LENGTH_SHORT).show()
                         viewModel.doneNavigate()
                     }
                     3 -> {
                         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAboutFragment())
-                        Toast.makeText(context, responseArray[3] , Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, responseArray[it] , Toast.LENGTH_SHORT).show()
                         viewModel.doneNavigate()
                     }
                 }

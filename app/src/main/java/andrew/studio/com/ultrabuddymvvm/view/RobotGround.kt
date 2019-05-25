@@ -75,7 +75,7 @@ class RobotGround(context: Context, attrs: AttributeSet) : View(context, attrs) 
             invalidate()
         }
 
-    var robotPosition = RobotPosition(0, 0, NORTH)
+    var robotPosition = RobotPosition(3*48, 2*48, NORTH)
         set(value) {
             field = value
             positionTrack.add(value)
@@ -146,6 +146,8 @@ class RobotGround(context: Context, attrs: AttributeSet) : View(context, attrs) 
             drawTrack(canvas, trackColor, positionTrack[i], positionTrack[i+1])
         }
         drawRobot(canvas)
+
+
     }
 
     private fun drawObstacles(canvas: Canvas) {
@@ -167,9 +169,9 @@ class RobotGround(context: Context, attrs: AttributeSet) : View(context, attrs) 
         paint.color = color
         if (points.size <= 2) return
         val path = Path().apply {
-            moveTo(points[0].x.toFloat(), points[0].y.toFloat())
+            moveTo(points[0].x.toUltraUnit(), points[0].y.toUltraUnit())
             for (i in 1 until points.size) {
-                lineTo(points[i].x.toFloat(), points[i].y.toFloat())
+                lineTo(points[i].x.toUltraUnit(), points[i].y.toUltraUnit())
             }
             if (isClosed) {
                 close()

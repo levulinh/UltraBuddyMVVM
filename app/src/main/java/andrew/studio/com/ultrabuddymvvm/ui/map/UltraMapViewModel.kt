@@ -18,7 +18,7 @@ import org.jetbrains.annotations.TestOnly
 import timber.log.Timber
 
 const val MY_ID = "5cc8244ea17725001735abd8"
-const val LOCATION_TOPIC = "ub/position"
+const val LOCATION_TOPIC = "position"
 
 class UltraMapViewModel(
     private val groundRepository: GroundRepository, application: Application
@@ -51,9 +51,9 @@ class UltraMapViewModel(
                 val messageString = message.toString()
                 when (topic) {
                     LOCATION_TOPIC -> {
-                        if (messageString.contains('|')){
+                        if (messageString.contains(',')){
                             val paramList = messageString.split('|')
-                            val point = RobotPosition(paramList[0].toInt(), paramList[1].toInt(), paramList[2].toLong())
+                            val point = RobotPosition(paramList[0].toInt()*48, paramList[1].toInt()*48, paramList[2].toLong())
                             _robotPositionPoint.value = point
                         }
                     }
@@ -85,15 +85,15 @@ class UltraMapViewModel(
 
     @TestOnly
     fun initGround() {
-        val w = 1000
-        val h = 1000
+        val w = 640
+        val h = 720
         val obstacles = listOf(
             Polygon(
                 listOf(
-                    Point(366, 611),
-                    Point(143, 547),
-                    Point(212, 319),
-                    Point(466, 312)
+                    Point(280, 280),
+                    Point(480, 280),
+                    Point(480, 600),
+                    Point(280, 600)
                 )
             )
         )
