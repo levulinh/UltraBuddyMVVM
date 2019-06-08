@@ -3,16 +3,13 @@ package andrew.studio.com.ultrabuddymvvm.view
 import andrew.studio.com.ultrabuddymvvm.R
 import andrew.studio.com.ultrabuddymvvm.data.entity.Point
 import andrew.studio.com.ultrabuddymvvm.data.entity.Polygon
-import andrew.studio.com.ultrabuddymvvm.ui.map.UltraMapViewModel
 import andrew.studio.com.ultrabuddymvvm.ui.map.UltraMapViewModel.RobotPosition
 import andrew.studio.com.ultrabuddymvvm.view.RobotGround.Directions.EAST
 import andrew.studio.com.ultrabuddymvvm.view.RobotGround.Directions.NORTH
 import andrew.studio.com.ultrabuddymvvm.view.RobotGround.Directions.SOUTH
 import android.content.Context
 import android.graphics.*
-import android.hardware.usb.UsbEndpoint
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import kotlin.math.roundToInt
@@ -123,10 +120,10 @@ class RobotGround(context: Context, attrs: AttributeSet) : View(context, attrs) 
     }
 
     object Directions {
-        const val EAST = 0L
-        const val WEST = 1L
+        const val EAST = 1L
+        const val WEST = 3L
         const val SOUTH = 2L
-        const val NORTH = 3L
+        const val NORTH = 0L
     }
 
     override fun onDraw(canvas: Canvas) {

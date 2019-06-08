@@ -7,6 +7,7 @@ import andrew.studio.com.ultrabuddymvvm.data.entity.Polygon
 import andrew.studio.com.ultrabuddymvvm.data.repository.GroundRepository
 import andrew.studio.com.ultrabuddymvvm.utils.Helper
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -48,11 +49,12 @@ class UltraMapViewModel(
     private fun setMqttCallback() {
         client.setCallback(object : MqttCallback {
             override fun messageArrived(topic: String?, message: MqttMessage?) {
+                Toast.makeText(getApplication(), message.toString(), Toast.LENGTH_SHORT).show()
                 val messageString = message.toString()
                 when (topic) {
                     LOCATION_TOPIC -> {
                         if (messageString.contains(',')){
-                            val paramList = messageString.split('|')
+                            val paramList = messageString.split(',')
                             val point = RobotPosition(paramList[0].toInt()*48, paramList[1].toInt()*48, paramList[2].toLong())
                             _robotPositionPoint.value = point
                         }

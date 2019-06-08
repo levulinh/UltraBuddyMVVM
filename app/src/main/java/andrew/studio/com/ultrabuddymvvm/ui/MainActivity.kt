@@ -3,18 +3,17 @@ package andrew.studio.com.ultrabuddymvvm.ui
 import andrew.studio.com.ultrabuddymvvm.R
 import andrew.studio.com.ultrabuddymvvm.UltraBuddyApplication
 import andrew.studio.com.ultrabuddymvvm.internal.Helper
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupActionBarWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 import org.eclipse.paho.android.service.MqttAndroidClient
-import org.eclipse.paho.client.mqttv3.*
+import org.eclipse.paho.client.mqttv3.IMqttActionListener
+import org.eclipse.paho.client.mqttv3.IMqttToken
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         val token = client.connect(options)
         token.actionCallback = object : IMqttActionListener{
             override fun onSuccess(asyncActionToken: IMqttToken?) {
+                Toast.makeText(this@MainActivity, "MQTT Connect Success", Toast.LENGTH_SHORT).show()
                 Helper.mqttSubscribe(client, "ub/response")
                 Helper.mqttSubscribe(client, "position")
             }

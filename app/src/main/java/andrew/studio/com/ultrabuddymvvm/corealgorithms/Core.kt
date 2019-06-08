@@ -19,4 +19,6 @@ interface Core {
     fun doBfs(vs: Int, us: Int, ve: Int, ue: Int)
     fun track(u: Int, v: Int)
     fun toAction(sourceNode: Node, targetNode: Node): String
+    fun toActionAstar(sourceNode: AStar.StarNode, targetNode: AStar.StarNode): String
+    fun toStarGround(): Array<IntArray>
 }

@@ -2,6 +2,7 @@ package andrew.studio.com.ultrabuddymvvm.ui.home
 
 import andrew.studio.com.ultrabuddymvvm.R
 import andrew.studio.com.ultrabuddymvvm.UltraBuddyApplication
+import andrew.studio.com.ultrabuddymvvm.corealgorithms.AStar
 import andrew.studio.com.ultrabuddymvvm.corealgorithms.Core
 import andrew.studio.com.ultrabuddymvvm.corealgorithms.models.Playground
 import andrew.studio.com.ultrabuddymvvm.corealgorithms.models.Point2D
@@ -137,18 +138,36 @@ class HomeViewModel(
             ue = 4
             ve = 12
 
-            doBfs(us, vs, ue, ve)
-            if (trackFound){
-                track(ve, ue)
-                path = path.asReversed()
+//            doBfs(us, vs, ue, ve)
+//            if (trackFound){
+//                track(ve, ue)
+//                path = path.asReversed()
+//                for (n in path) {
+//                    Timber.d("[${n.x}, ${n.y}]")
+//                }
+//                var commandString = ""
+//                for (i in 0 until path.size-1) {
+//                    commandString += toAction(path[i], path[i+1])
+//                }
+//                commandString += "E"
+//                Timber.d(commandString)
+//            } else {
+//                Timber.d("No Track Found")
+//            }
+            val aStar = AStar(core.toStarGround(), core.us, core.vs, false)
+            val pathStar = aStar.findPathTo(core.ue, core.ve)
+            if (pathStar != null) {
+                for (n in pathStar) {
+                    Timber.d("Astar[${n.x}, ${n.y}]")
+                }
                 var commandString = ""
-                for (i in 0 until path.size-1) {
-                    commandString += toAction(path[i], path[i+1])
+                for (i in 0 until pathStar.size - 1) {
+                    commandString += toActionAstar(pathStar[i], pathStar[i + 1])
                 }
                 commandString += "E"
-                Timber.d(commandString)
+                Timber.d("Astar: $commandString")
             } else {
-                Timber.d("No Track Found")
+                Timber.d("Astar: No Track Found")
             }
         }
     }

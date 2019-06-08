@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import timber.log.Timber
 
 class ObstacleAdapter: ListAdapter<Polygon, RecyclerView.ViewHolder>(PolygonDiffCallback()) {
+    lateinit var mCurrentList: MutableList<Polygon>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        mCurrentList = currentList
         return ObstacleViewHolder.from(parent)
     }
 
@@ -59,12 +61,16 @@ class ObstacleAdapter: ListAdapter<Polygon, RecyclerView.ViewHolder>(PolygonDiff
 }
 
 class PolygonDiffCallback: DiffUtil.ItemCallback<Polygon>() {
+    private fun Polygon.toUltraString(): String {
+        return Helper.polygonToString(this)
+    }
+
     override fun areItemsTheSame(oldItem: Polygon, newItem: Polygon): Boolean {
         return oldItem.points == newItem.points
     }
 
     override fun areContentsTheSame(oldItem: Polygon, newItem: Polygon): Boolean {
-        return oldItem.points == newItem.points
+        return oldItem.toUltraString() == newItem.toUltraString()
     }
 
 }

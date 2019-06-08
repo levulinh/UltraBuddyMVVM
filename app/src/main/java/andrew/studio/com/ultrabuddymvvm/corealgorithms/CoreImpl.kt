@@ -19,7 +19,6 @@ import java.util.*
 
 
 class CoreImpl(context: Context) : Core {
-
     private val appContext = context.applicationContext
     private val preferences: SharedPreferences
         get() = PreferenceManager.getDefaultSharedPreferences(appContext)
@@ -45,6 +44,7 @@ class CoreImpl(context: Context) : Core {
     override var path = mutableListOf<Node>()
     private val pathEncoded = mutableListOf<Int>()
     private var currentDir = NORTH
+    private var currentDirAStar = NORTH
     private val tracking = IntArray(40000)
     private val isFree = Array(200) { BooleanArray(200) }
 
@@ -56,7 +56,6 @@ class CoreImpl(context: Context) : Core {
     override var vs: Int = 0
     override var ue: Int = 0
     override var ve: Int = 0
-
 
     init {
         numCol = w / dens
@@ -115,8 +114,8 @@ class CoreImpl(context: Context) : Core {
         }
     }
 
-    private fun isAccessible(u: Int, v: Int): Boolean{
-        if (u<0 || u>numCol || v <0 || v>numRow) return false
+    private fun isAccessible(u: Int, v: Int): Boolean {
+        if (u < 0 || u > numCol || v < 0 || v > numRow) return false
         return ground[u][v]
     }
 
@@ -160,15 +159,37 @@ class CoreImpl(context: Context) : Core {
         } else return
     }
 
+    override fun toStarGround(): Array<IntArray> {
+        val array = Array(numRow) { IntArray(numCol) }
+        for (i in 0 until numRow)
+            for (j in 0 until numCol) {
+                array[i][j] = if (ground[i][j]) 0 else -1
+            }
+        return array
+    }
+
     override fun toAction(sourceNode: Node, targetNode: Node): String {
+        var turnDir: Int = NORTH
+        if (targetNode.y > sourceNode.y) turnDir = EAST
+        if (targetNode.y < sourceNode.y) turnDir = WEST
+        if (targetNode.x > sourceNode.x) turnDir = NORTH
+        if (targetNode.x < sourceNode.x) turnDir = SOUTH
+
+        val action = ACTION_ARRAY[currentDir][turnDir]
+        currentDir = turnDir
+        return action.toString()
+    }
+
+    override fun toActionAstar(sourceNode: AStar.StarNode, targetNode: AStar.StarNode): String {
         var turnDir: Int = NORTH
         if (targetNode.x > sourceNode.x) turnDir = EAST
         if (targetNode.x < sourceNode.x) turnDir = WEST
         if (targetNode.y > sourceNode.y) turnDir = NORTH
         if (targetNode.y < sourceNode.y) turnDir = SOUTH
 
-        val action = ACTION_ARRAY[currentDir][turnDir]
-        currentDir = turnDir
+        val action = ACTION_ARRAY[currentDirAStar][turnDir]
+        currentDirAStar = turnDir
         return action.toString()
     }
+
 }
