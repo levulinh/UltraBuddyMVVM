@@ -4,6 +4,7 @@ import andrew.studio.com.ultrabuddymvvm.data.entity.Point
 import andrew.studio.com.ultrabuddymvvm.data.entity.Polygon
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.lang.Exception
 import java.lang.NumberFormatException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -60,7 +61,7 @@ class Helper {
                     points.add(Point(paramList[0].toInt(), paramList[1].toInt()))
                 }
                 return Polygon(points)
-            } catch (e: NumberFormatException) {
+            } catch (e: Exception) {
                 throw e
             }
 

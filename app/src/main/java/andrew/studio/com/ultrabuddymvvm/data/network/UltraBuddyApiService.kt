@@ -46,6 +46,13 @@ interface UltraBuddyApiService {
         @Field("obstacles") obstacles: String
     ): Deferred<GroundResponse>
 
+    @FormUrlEncoded
+    @POST("ground/add")
+    fun updateGroundAcync(
+        @Field("userId") userId: String,
+        @Field("obstacles") obstacles: String
+    ): Deferred<GroundResponse>
+
     companion object {
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor

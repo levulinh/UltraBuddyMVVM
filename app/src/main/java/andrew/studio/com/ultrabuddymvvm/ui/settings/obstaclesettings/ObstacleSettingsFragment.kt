@@ -27,6 +27,7 @@ class ObstacleSettingsFragment : ScopedFragment(), KodeinAware {
     private val viewModelFactory by instance<ObstacleSettingsViewModelFactory>()
 
     private lateinit var viewModel: ObstacleSettingsViewModel
+    private lateinit var adapter: ObstacleAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,15 +37,13 @@ class ObstacleSettingsFragment : ScopedFragment(), KodeinAware {
         val binding: ObstacleSettingsFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.obstacle_settings_fragment, container, false)
 
-        val adapter = ObstacleAdapter()
+        adapter = ObstacleAdapter()
         val linearLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         setHasOptionsMenu(true)
 
-        binding.rvObstacle.apply {
-            this.adapter = adapter
-            this.layoutManager = linearLayoutManager
-        }
+        binding.rvObstacle.adapter = adapter
+        binding.rvObstacle.layoutManager = linearLayoutManager
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ObstacleSettingsViewModel::class.java)
         binding.viewModel = viewModel
@@ -73,7 +72,7 @@ class ObstacleSettingsFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun saveObstacle() {
-        viewModel.saveObstacles()
+       viewModel.saveObstacles(adapter)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

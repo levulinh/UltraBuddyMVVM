@@ -13,19 +13,26 @@ import androidx.recyclerview.widget.RecyclerView
 import timber.log.Timber
 
 class ObstacleAdapter: ListAdapter<Polygon, RecyclerView.ViewHolder>(PolygonDiffCallback()) {
-    lateinit var mCurrentList: MutableList<Polygon>
+    private var mCurrentList: MutableList<String> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        mCurrentList = currentList
+        mCurrentList.clear()
+        for (polygon in currentList) {
+            mCurrentList.add(Helper.polygonToString(polygon))
+        }
         return ObstacleViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ObstacleViewHolder).bind(getItem(position))
+        (holder as ObstacleViewHolder).bind(getItem(position), mCurrentList, position)
+    }
+
+    fun getMyCurrentList(): MutableList<String>{
+        return mCurrentList
     }
 
     class ObstacleViewHolder private constructor(private val binding: ItemObstacleEditBinding) :
             RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Polygon) {
+        fun bind(item: Polygon, list: MutableList<String>, position: Int) {
             binding.textContent.setText(Helper.polygonToString(item))
             binding.textContent.addTextChangedListener(object : TextWatcher{
                 override fun afterTextChanged(s: Editable?) {
@@ -33,10 +40,11 @@ class ObstacleAdapter: ListAdapter<Polygon, RecyclerView.ViewHolder>(PolygonDiff
                 }
 
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    Timber.d(s.toString())
+                    list[position] = s.toString()
                 }
             })
             binding.buttonDelete.setOnClickListener {
@@ -61,16 +69,13 @@ class ObstacleAdapter: ListAdapter<Polygon, RecyclerView.ViewHolder>(PolygonDiff
 }
 
 class PolygonDiffCallback: DiffUtil.ItemCallback<Polygon>() {
-    private fun Polygon.toUltraString(): String {
-        return Helper.polygonToString(this)
-    }
 
     override fun areItemsTheSame(oldItem: Polygon, newItem: Polygon): Boolean {
         return oldItem.points == newItem.points
     }
 
     override fun areContentsTheSame(oldItem: Polygon, newItem: Polygon): Boolean {
-        return oldItem.toUltraString() == newItem.toUltraString()
+        return oldItem.points == newItem.points
     }
 
 }

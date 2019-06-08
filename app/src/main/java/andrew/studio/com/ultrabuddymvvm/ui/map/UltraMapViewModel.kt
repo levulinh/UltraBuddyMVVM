@@ -41,7 +41,7 @@ class UltraMapViewModel(
     private val client = state.client
 
     init {
-        initGround()
+//        initGround()
         setMqttCallback()
         fetchGroundParameters()
     }
@@ -85,29 +85,29 @@ class UltraMapViewModel(
         job.cancel()
     }
 
-    @TestOnly
-    fun initGround() {
-        val w = 640
-        val h = 720
-        val obstacles = listOf(
-            Polygon(
-                listOf(
-                    Point(280, 280),
-                    Point(480, 280),
-                    Point(480, 600),
-                    Point(280, 600)
-                )
-            )
-        )
-
-        val obstacleString = Helper.objectToString(obstacles)
-
-        val groundEntry = GroundEntry(w, h, obstacleString, userId = MY_ID)
-        uiScope.launch {
-            groundRepository.addCurrentGround(groundEntry.userId, groundEntry.width, groundEntry.height, obstacleString)
-            fetchGroundParameters()
-        }
-    }
+//    @TestOnly
+//    fun initGround() {
+//        val w = 640
+//        val h = 720
+//        val obstacles = listOf(
+//            Polygon(
+//                listOf(
+//                    Point(280, 280),
+//                    Point(480, 280),
+//                    Point(480, 600),
+//                    Point(280, 600)
+//                )
+//            )
+//        )
+//
+//        val obstacleString = Helper.objectToString(obstacles)
+//
+//        val groundEntry = GroundEntry(w, h, obstacleString, userId = MY_ID)
+//        uiScope.launch {
+//            groundRepository.addCurrentGround(groundEntry.userId, groundEntry.width, groundEntry.height, obstacleString)
+//            fetchGroundParameters()
+//        }
+//    }
 
     class RobotPosition(val x: Int, val y: Int, val direction: Long)
 }

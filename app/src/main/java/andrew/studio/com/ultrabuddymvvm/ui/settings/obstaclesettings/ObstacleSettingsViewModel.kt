@@ -1,7 +1,6 @@
 package andrew.studio.com.ultrabuddymvvm.ui.settings.obstaclesettings
 
 import andrew.studio.com.ultrabuddymvvm.R
-import andrew.studio.com.ultrabuddymvvm.data.entity.GroundEntry
 import andrew.studio.com.ultrabuddymvvm.data.entity.Polygon
 import andrew.studio.com.ultrabuddymvvm.data.repository.GroundRepository
 import andrew.studio.com.ultrabuddymvvm.utils.Helper
@@ -11,7 +10,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
+import timber.log.Timber
+import java.lang.Exception
+import java.lang.NumberFormatException
 
+const val MY_ID = "5cc8244ea17725001735abd8"
 class ObstacleSettingsViewModel(
     private val groundRepository: GroundRepository,
     application: Application
@@ -61,13 +64,27 @@ class ObstacleSettingsViewModel(
                 localObstacleList = newList
             }
             _currentGroundParams.value = newList
-        } catch (e: NumberFormatException) {
+        } catch (e: Exception) {
             Toast.makeText(context, context.getString(R.string.illegal_syntax), Toast.LENGTH_SHORT).show()
         }
     }
 
-    fun saveObstacles() {
-
+    fun saveObstacles(adapter: ObstacleAdapter) {
+        val list = adapter.getMyCurrentList()
+        val polygonList = mutableListOf<Polygon>()
+        try {
+            for (s in list) {
+                if (s.isEmpty()) continue
+                polygonList.add(Helper.stringToPolygon(s))
+            }
+//            Timber.d(Helper.objectToString(polygonList))
+            uiScope.launch {
+                groundRepository.updateObstacles(userId = MY_ID, obstacles = Helper.objectToString(polygonList))
+                Toast.makeText(context, "The obstacles has been saved!", Toast.LENGTH_LONG).show()
+            }
+        } catch (ex: Exception) {
+            Toast.makeText(context, context.getString(R.string.illegal_syntax), Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onCleared() {

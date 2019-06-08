@@ -43,6 +43,12 @@ class GroundRepositoryImpl(private val groundDao: GroundDao,
         }
     }
 
+    override suspend fun updateCurrentGround(userId: String, obstacles: String) {
+        withContext(Dispatchers.IO){
+            groundDataSource.upsertObstacle(userId, obstacles)
+        }
+    }
+
     override suspend fun getCurrentGround(): LiveData<GroundEntry> {
         return withContext(Dispatchers.IO) {
             groundDao.getGroundLive()
