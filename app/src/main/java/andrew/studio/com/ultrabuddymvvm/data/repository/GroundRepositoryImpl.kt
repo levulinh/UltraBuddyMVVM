@@ -49,6 +49,12 @@ class GroundRepositoryImpl(private val groundDao: GroundDao,
         }
     }
 
+    override suspend fun updateWidthHeight(userId: String, width: Int, height: Int) {
+        withContext(Dispatchers.IO){
+            groundDataSource.upsertWidthHeight(userId, width, height)
+        }
+    }
+
     override suspend fun getCurrentGround(): LiveData<GroundEntry> {
         return withContext(Dispatchers.IO) {
             groundDao.getGroundLive()

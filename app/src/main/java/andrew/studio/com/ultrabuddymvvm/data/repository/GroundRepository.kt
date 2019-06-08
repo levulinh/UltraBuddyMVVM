@@ -9,5 +9,6 @@ interface GroundRepository {
     suspend fun addCurrentGround(userId: String, width: Int, height: Int, obstacles: String)
     suspend fun updateCurrentGround(userId: String, obstacles: String)
     suspend fun updateObstacles(userId: String, obstacles: String)
+    suspend fun updateWidthHeight(userId: String, width: Int, height: Int)
     suspend fun fetchGround(userId: String)
 }

@@ -48,9 +48,17 @@ interface UltraBuddyApiService {
 
     @FormUrlEncoded
     @POST("ground/add")
-    fun updateGroundAcync(
+    fun updateGroundAsync(
         @Field("userId") userId: String,
         @Field("obstacles") obstacles: String
+    ): Deferred<GroundResponse>
+
+    @FormUrlEncoded
+    @POST("ground/add")
+    fun updateWidthHeightAsync(
+        @Field("userId") userId: String,
+        @Field("width") width: Int,
+        @Field("height") height: Int
     ): Deferred<GroundResponse>
 
     companion object {

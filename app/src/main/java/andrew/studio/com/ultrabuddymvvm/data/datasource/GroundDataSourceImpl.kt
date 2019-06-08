@@ -39,7 +39,18 @@ class GroundDataSourceImpl(
     override suspend fun upsertObstacle(userId: String, obstacles: String) {
         try {
             val fetchedGround = ultraBuddyApiService
-                .updateGroundAcync(userId, obstacles)
+                .updateGroundAsync(userId, obstacles)
+                .await()
+            _downloadedGround.postValue(fetchedGround)
+        }catch (e: NoConnectivityException) {
+            Timber.tag("Connectivity").e(e, "No internet connection")
+        }
+    }
+
+    override suspend fun upsertWidthHeight(userId: String, width: Int, height: Int) {
+        try {
+            val fetchedGround = ultraBuddyApiService
+                .updateWidthHeightAsync(userId, width, height)
                 .await()
             _downloadedGround.postValue(fetchedGround)
         }catch (e: NoConnectivityException) {
